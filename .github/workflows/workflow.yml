@@ -50,6 +50,8 @@ jobs:
         id: cypress
         uses: cypress-io/github-action@v2
         continue-on-error: true
+ 
+      - name: echo
         run: echo ${{steps.cypress.outcome}}
 
       # - name: Upload
