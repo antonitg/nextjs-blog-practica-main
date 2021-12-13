@@ -25,3 +25,7 @@ yarn-debug.log*
 yarn-error.log*
 
 .vercel
+*.png
+videos/
+*.spec.js.mp4
+*.mp4

@@ -31,3 +31,18 @@ jobs:
           npm install
           npm install --save-dev eslint
           npm run lint
+
+  Cypress_job:
+    needs: Linter_job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run lint
+        run: |
+          npm install
+          npm run dev &
+          ./node_modules/.bin/cypress run
+          ./node_modules/.bin/cypress run >> result.txt
