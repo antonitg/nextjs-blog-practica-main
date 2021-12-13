@@ -35,7 +35,7 @@ jobs:
   Cypress_job:
     needs: Linter_job
     runs-on: ubuntu-latest
-
+    if: always()
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
