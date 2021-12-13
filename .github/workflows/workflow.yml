@@ -35,12 +35,12 @@ jobs:
   Cypress_job:
     needs: Linter_job
     runs-on: ubuntu-latest
-    if: always()
+    continue-on-error: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run lint
+      - name: Run cypress tests
         run: |
           npm install
           npm run dev &
