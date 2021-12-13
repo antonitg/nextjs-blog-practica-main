@@ -40,9 +40,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run cypress tests
-        run: |
-          npm install
-          npm run dev &
-          ./node_modules/.bin/cypress run
-          ./node_modules/.bin/cypress run >> result.txt
+      # - name: Run cypress tests
+      #   run: |
+      #     npm install
+      #     npm run dev &
+      #     ./node_modules/.bin/cypress run
+      #     ./node_modules/.bin/cypress run >> result.txt
+      - name: Cypress run
+        id: cypress
+        uses: cypress-io/github-action@v2
+        continue-on-error: true
+        run: echo ${{steps.cypress.outcome}}
+
+      # - name: Upload
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: results
+      #     path: result.txt
+  # Add_badge_job:
+  #   needs: Cypress_job
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - 
