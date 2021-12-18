@@ -51,7 +51,7 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const fs = __nccwpck_require__(147);
-const res = fs.readFileSync("result.txt", "utf8")
+const res = fs.readFileSync("result.txt")
 if (res == "success") {
    var badge = "![badge-success](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)"
 } else {
