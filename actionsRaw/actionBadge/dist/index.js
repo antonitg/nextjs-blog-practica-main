@@ -58,7 +58,7 @@ if (res == "success") {
    var badge = "![badge-failure](https://img.shields.io/badge/test-failure-red)"
 }
 
-fs.readFile("README.md", "utf8", function (err, data) {
+fs.readFile("README.md", function (err, data) {
     const result = data.replace(/(?<=\<!---Section badge --\>\n)[^]+(?=\n\<!---End section badge --\>)/g, badge);
     fs.writeFile("README.md", result);
 });
