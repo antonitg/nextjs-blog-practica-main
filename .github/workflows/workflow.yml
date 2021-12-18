@@ -47,7 +47,7 @@ jobs:
         continue-on-error: true
  
       - name: echo
-        run: echo ${{steps.cypress.outcome}}
+        run: echo ${{steps.cypress.outcome}} >> result.txt
 
       - name: Upload
         uses: actions/upload-artifact@v2
@@ -67,4 +67,14 @@ jobs:
           name: result.txt
       - name: Badge  
         uses: ./.github/actions/badge/
+      
+      - name: Push
+        run: | 
+            git config user.name "Antoni"
+            git config user.email "antonitormo@gmail.com"
+            git pull
+            git add .
+            git commit --allow-empty -m "Readme" 
+            git remote set-url origin https://antonitg:${{ secrets.PASSWD }}@github.com/antonitg/nextjs-blog-practica.git
+            git push
 
