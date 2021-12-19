@@ -1,5 +1,5 @@
 # nextjs-blog-practica-main
-Section badge  End section badge
+![badge-failure](https://img.shields.io/badge/test-failure-red)
 
 # Practica Pepe
 
