@@ -50,7 +50,7 @@ jobs:
           start: npm start
  
       - name: echo
-        run: echo ${{steps.cypress.outcome}} >> result.txt
+        run: echo ${{steps.cypress.outcome}} > result.txt
 
       - name: Upload
         uses: actions/upload-artifact@v2
