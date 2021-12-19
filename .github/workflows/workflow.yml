@@ -90,7 +90,7 @@ jobs:
       - name: deploy
         uses: amondnet/vercel-action@v20
         with:
-          vercel-token: ${{ secrets.TKN_VERC }}
+          vercel-token: ${{ secrets.VERC_TKN }}
           vercel-project-id: ${{ secrets.VERC_PROJ_ID}}
           vercel-org-id: ${{ secrets.VERC_ORG_ID}}
           working-directory: ./
