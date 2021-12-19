@@ -1,3 +1,3 @@
 # nextjs-blog-practica-main
  
-<!---Section badge --\>  <!---End section badge --\>
+Section badge  End section badge
