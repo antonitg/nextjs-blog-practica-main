@@ -142,4 +142,174 @@ fs.readFile("README.md", "utf8", function (err, data) {
 });  
 ```
 
-<!-- Section badg  End section badg -->
+## Mail
+
+### Explicación job
+Descargamos el codigo del repositorio con la action checkout i ejecutamos la action propia del mail.
+```
+  Mail_job:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [Deploy_job, Cypress_job, Linter_job, Add_badge_job ]
+    steps:
+      - name: Checkout      
+        uses: actions/checkout@v2
+      
+      - name: Send mail
+        uses: ./.github/actions/mail/
+        with:
+          resLinter: ${{ needs.Linter_job.result }}
+          resBadge:  ${{ needs.Add_badge_job.result }}
+          resCypress:  ${{ needs.Cypress_job.result }}
+          resDeploy:  ${{ needs.Deploy_job.result }}
+          ownMail: ${{ secrets.OWNEMAIL  }}
+          ownPasswd: ${{ secrets.OWNPASSWD }}
+```
+### Action
+Para que funcionase he tenido que aceptar la funcion de login de fuentes desconoidas de google y gmail
+```
+var nodemailer = require('nodemailer');
+
+const core = require('@actions/core');
+var smtpTransport = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+        user: core.getInput('ownMail'),
+        pass: core.getInput('ownPasswd')
+        }
+});
+var mailOptions = {
+    from: core.getInput('ownMail'),
+    to: 'antonitormo@gmail.com', 
+    subject: 'Resultado del workflow ejecutado',
+    text: 'Se ha realizado un push en la rama main que ha provocado la ejecución del workflow nombre_repositorio_workflow con los siguientes resultados: linter_job: ' + core.getInput('resLinter') + 'cypress_job: ' + core.getInput('resCypress') + 'add_badge_job: ' + core.getInput('resBadge') + 'deploy_job:' + core.getInput('resDeploy')
+}
+smtpTransport.sendMail(mailOptions, function(error, response){
+    if(error){
+        console.log(error);
+    }else{
+        console.log(response);
+    }
+});
+```
+![image](https://user-images.githubusercontent.com/45063500/146688794-d8bc8224-2df1-4adc-b5da-f8b307ec482a.png)
+![image](https://user-images.githubusercontent.com/45063500/146689041-72d7c76d-83d6-43c2-bede-5491dc892a81.png)
+![image](https://user-images.githubusercontent.com/45063500/146689049-e8c7f0ff-8583-4819-bd2c-dd60154f87f4.png)
+
+## Workflow final
+```
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the nodejs_linter_job branch
+  push:
+    branches: [nextjs-blog-practica_workflow]
+  pull_request:
+    branches: [nextjs-blog-practica_workflow]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  Linter_job:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run lint
+        run: |
+          npm install
+          npm install --save-dev eslint
+          npm run lint
+
+  Cypress_job:
+    needs: Linter_job
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Cypress run
+        id: cypress
+        uses: cypress-io/github-action@v2
+        continue-on-error: true
+        with:
+          config-file: cypress.json
+          build: npm run build
+          start: npm start
+ 
+      - name: echo
+        run: echo ${{steps.cypress.outcome}} > result.txt
+
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: result.txt
+          path: result.txt
+  Add_badge_job:
+    needs: Cypress_job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      
+      - name: Download Changes
+        uses: actions/download-artifact@v2
+        with:
+          name: result.txt
+      - name: Badge  
+        uses: ./.github/actions/badge/
+      
+      - name: Push
+        run: | 
+            git config user.name "Antoni"
+            git config user.email "antonitormo@gmail.com"
+            git pull
+            git add .
+            git commit --allow-empty -m "Readme" 
+            git remote set-url origin https://antonitg:${{ secrets.PASSWD }}@github.com/antonitg/nextjs-blog-practica-main.git
+            git push
+  Deploy_job:
+    runs-on: ubuntu-latest
+    needs: Cypress_job
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: deploy
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERC_TKN }}
+          vercel-project-id: ${{ secrets.VERC_PROJ_ID}}
+          vercel-org-id: ${{ secrets.VERC_ORG_ID}}
+          working-directory: ./
+
+  Mail_job:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [Deploy_job, Cypress_job, Linter_job, Add_badge_job ]
+    steps:
+      - name: Checkout      
+        uses: actions/checkout@v2
+      
+      - name: Send mail
+        uses: ./.github/actions/mail/
+        with:
+          resLinter: ${{ needs.Linter_job.result }}
+          resBadge:  ${{ needs.Add_badge_job.result }}
+          resCypress:  ${{ needs.Cypress_job.result }}
+          resDeploy:  ${{ needs.Deploy_job.result }}
+          ownMail: ${{ secrets.OWNEMAIL  }}
+          ownPasswd: ${{ secrets.OWNPASSWD }}
+```
