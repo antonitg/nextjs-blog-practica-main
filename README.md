@@ -93,6 +93,9 @@ Las badges son utilizadas por el CI para comprobar de una manera visual la final
 ### Expliación del job
 Descargamos el codigo del repositorio con la action checkout i ejecutamos la action de download-artifact praa descargar el txt que habiamos subido en la action anterior, ejecutamos el action personalizada que hemos creado de la badge que hace los cambios en el readme para poner la badge y subimos los cambios a la rama main, tambien hacemos que necesite el job Cypress_job para que se ejecute despues.
 
+Section badge  End section badge
+
+
 ```
   Add_badge_job:
     needs: Cypress_job
