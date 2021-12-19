@@ -29,3 +29,5 @@ yarn-error.log*
 videos/
 *.spec.js.mp4
 *.mp4
+
+.vercel
