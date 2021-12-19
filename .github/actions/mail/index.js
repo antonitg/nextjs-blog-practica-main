@@ -14928,11 +14928,9 @@ const core = __nccwpck_require__(5555);
 var smtpTransport = nodemailer.createTransport({
     service: "Gmail",
     auth: {
-        xoauth2: xoauth2.createXOAuth2Generator({
         user: core.getInput('ownMail'),
         pass: core.getInput('ownPasswd')
-        })
-    }
+        }
 });
 var mailOptions = {
     from: core.getInput('ownMail'),

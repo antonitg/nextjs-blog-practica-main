@@ -68,4 +68,4 @@ fs.readFile("README.md", "utf8", function (err, data) {
 
 module.exports = __webpack_exports__;
 /******/ })()
-;
+})
