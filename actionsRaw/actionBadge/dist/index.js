@@ -51,17 +51,18 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const fs = __nccwpck_require__(147);
-const res = fs.readFileSync("result.txt")
+const res = fs.readFileSync("result.txt", "utf8")
 if (res == "success") {
    var badge = "![badge-success](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)"
 } else {
    var badge = "![badge-failure](https://img.shields.io/badge/test-failure-red)"
 }
 
-fs.readFile("README.md", function (err, data) {
-    const result = data.replace(/(?<=\<!---Section badge --\>\n)[^]+(?=\n\<!---End section badge --\>)/g, badge);
-    fs.writeFile("README.md", result);
-});
+fs.readFile("README.md", "utf8", function (err, data) {
+   var result = data.replace(/Section badge.*End section badge/, badge);
+   fs.writeFile("README.md", result, function (err) {
+   });
+});  
 })();
 
 module.exports = __webpack_exports__;

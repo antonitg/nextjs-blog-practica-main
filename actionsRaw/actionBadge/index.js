@@ -7,6 +7,7 @@ if (res == "success") {
 }
 
 fs.readFile("README.md", "utf8", function (err, data) {
-    const result = data.replace(/(?<=\<!---Section badge --\>\n)[^]+(?=\n\<!---End section badge --\>)/g, badge);
-    fs.writeFile("README.md", result, "utf8");
-});
+   var result = data.replace(/Section badge.*End section badge/, badge);
+   fs.writeFile("README.md", result, function (err) {
+   });
+});  
