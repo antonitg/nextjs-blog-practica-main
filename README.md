@@ -168,3 +168,6 @@ Descargamos el codigo del repositorio con la action checkout i ejecutamos la act
           vercel-org-id: ${{ secrets.VERC_ORG_ID}}
           working-directory: ./
 ```
+https://nextjs-blog-practica-main-l29ry1ac0-antonitg.vercel.app/
+![image](https://user-images.githubusercontent.com/45063500/146685985-234f9791-f0fb-478b-9898-f211e9348391.png)
+![image](https://user-images.githubusercontent.com/45063500/146685996-8dcb42e0-1fe0-4c0b-b43e-c1057b23ef1b.png)
