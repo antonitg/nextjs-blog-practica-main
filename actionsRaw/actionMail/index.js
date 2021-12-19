@@ -1,10 +1,14 @@
 var nodemailer = require('nodemailer');
+var xoauth2 = require('xoauth2');
+
 const core = require('@actions/core');
-var smtpTransport = nodemailer.createTransport("SMTP",{
+var smtpTransport = nodemailer.createTransport({
     service: "Gmail",
     auth: {
+        xoauth2: xoauth2.createXOAuth2Generator({
         user: core.getInput('ownMail'),
         pass: core.getInput('ownPasswd')
+        })
     }
 });
 var mailOptions = {

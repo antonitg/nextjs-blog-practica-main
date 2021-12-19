@@ -59,9 +59,10 @@ if (res == "success") {
 }
 
 fs.readFile("README.md", "utf8", function (err, data) {
+   console.log(err);
    var result = data.replace(/Section badge.*End section badge/, badge);
    fs.writeFile("README.md", result, function (err) {
-   });
+      console.log(err);
 });  
 })();
 
