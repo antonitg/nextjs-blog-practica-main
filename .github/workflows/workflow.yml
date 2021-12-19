@@ -95,3 +95,22 @@ jobs:
           vercel-org-id: ${{ secrets.VERC_ORG_ID}}
           working-directory: ./
 
+  Mail_job:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [Deploy_job, Cypress_job, Linter_job, Add_badge_job ]
+    steps:
+      - name: Checkout      
+        uses: actions/checkout@v2
+      
+      - name: Send mail
+        uses: ./.github/actions/mail/
+        with:
+          resLinter: ${{ needs.Linter_job.result }}
+          resBadge:  ${{ needs.Add_badge_job.result }}
+          resCypress:  ${{ needs.Cypress_job.result }}
+          resDeploy:  ${{ needs.Deploy_job.result }}
+          ownMail: ${{ secrets.OWNEMAIL  }}
+          ownPasswd: ${{ secrets.OWNPASSWD }}
+
+
