@@ -139,3 +139,29 @@ fs.readFile("README.md", "utf8", function (err, data) {
 });  
 ```
 Section badge  End section badge
+
+## Vercel
+### ¿Qué es Vercel?
+Vercel es una plataforma en la nube para sitios estáticos y funciones sin servidor. Permite a los desarrolladores alojar sitios web y servicios web que se implementan instantáneamente, escalan automáticamente y no requieren supervisión, todo sin configuración.
+
+### Expliación del job
+Descargamos el codigo del repositorio con la action checkout i ejecutamos la action de vercel pasandole los tokens que nos genera una vez instalamos vercel y usamos vercel link en el proyecto.
+![image](https://user-images.githubusercontent.com/45063500/146684851-327cb774-f1fa-49fe-b903-f76e5aef5269.png)
+![image](https://user-images.githubusercontent.com/45063500/146685294-dfc444aa-8a60-4c84-b57d-ae1cc4090bdf.png)
+
+```
+  Deploy_job:
+    runs-on: ubuntu-latest
+    needs: Cypress_job
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: deploy
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.TKN_VERC }}
+          vercel-project-id: ${{ secrets.VERC_PROJ_ID}}
+          vercel-org-id: ${{ secrets.VERC_ORG_ID}}
+          working-directory: ./
+```
