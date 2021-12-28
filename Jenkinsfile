@@ -70,7 +70,7 @@ pipeline {
         stage('Test') { 
             steps {
 //                 sh 'cypress install' 
-                sh 'npm install --save && npm run cypress run' 
+                sh 'npm run lint' 
             }
         }
     }
