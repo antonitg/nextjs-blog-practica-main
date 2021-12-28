@@ -64,7 +64,7 @@ pipeline {
         }
         stage('Deploy') { 
             steps {
-                sh 'npm run dev' 
+                sh 'nohup npm run dev' 
             }
         }
         stage('Test') { 
