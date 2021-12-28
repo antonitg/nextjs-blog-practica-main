@@ -1,6 +1,6 @@
 pipeline {
     agent any
-     tools {nodejs "nodejs"}
+//      tools {nodejs "nodejs"}
     stages {
         stage('Test') {
             steps {
@@ -8,7 +8,10 @@ pipeline {
 
 
                 // Run Maven on a Unix agent.
-                sh "npm run lint"
+                nodejs(nodeJSInstallationName: 'Node 6.x', configId: '<config-file-provider-id>') {
+                    sh 'npm run lint'
+                }
+//                 sh "npm run lint"
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
