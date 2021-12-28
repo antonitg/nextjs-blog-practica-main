@@ -8,7 +8,7 @@ pipeline {
 
 
                 // Run Maven on a Unix agent.
-                nodejs(nodeJSInstallationName: 'LTS', configId: '<config-file-provider-id>') {
+                nodejs(nodeJSInstallationName: 'nodejs', configId: '<config-file-provider-id>') {
                     sh 'npm run lint'
                 }
 //                 sh "npm run lint"
