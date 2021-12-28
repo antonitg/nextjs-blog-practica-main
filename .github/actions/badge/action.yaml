@@ -1,0 +1,5 @@
+name: 'badge'
+description: 'badge'
+runs:
+  using: 'node12'
+  main: 'index.js'

@@ -1,0 +1,18 @@
+name: 'mail'
+description: 'mail'
+inputs:
+  resCypress:
+    required: true
+  resDeploy:
+    required: true
+  resLinter:
+    required: true
+  resBadge:
+    required: true
+  ownMail:
+    required: true
+  ownPasswd:
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
