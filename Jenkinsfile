@@ -67,10 +67,15 @@ pipeline {
                 sh 'nohup npm run dev > /dev/null 2>&1 &' 
             }
         }
+        stage('Lint') { 
+            steps {
+                sh 'npm run lint' 
+            }
+        }
+          
         stage('Test') { 
             steps {
-//                 sh 'cypress install' 
-                sh 'npm run lint' 
+                sh 'npm run jest' 
             }
         }
     }
