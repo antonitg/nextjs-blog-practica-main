@@ -72,12 +72,6 @@ pipeline {
                 sh 'npm run lint' 
             }
         }
-          
-        stage('Test') { 
-            steps {
-                sh 'npm run jest' 
-            }
-        }
         stage('Parallel Stage') {
             when {
                 branch 'master'
@@ -90,11 +84,16 @@ pipeline {
                     }
                 }
                 stage('Branch B') {
-                    steps {
+                     steps {
                         echo "On Branch B"
                     }
                 }
             }
         }
+        stage('Test') { 
+            steps {
+                sh 'npm run jest' 
+            }
+        }  
     }
 }
