@@ -48,7 +48,9 @@
 
 pipeline {
     agent any
-
+    triggers {
+        pollSCM '*/3 * * * *'
+    }
 //         docker {
 //             image 'node:lts-buster-slim'
 //             args '-p 3000:3000'
