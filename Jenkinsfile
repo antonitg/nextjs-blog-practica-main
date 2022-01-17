@@ -1,4 +1,5 @@
 // pipeline {
+// va que tu pots
 //     agent any
 //      tools {nodejs "nodejs"}
 //     stages {
