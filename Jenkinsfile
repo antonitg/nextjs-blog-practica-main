@@ -81,13 +81,13 @@ pipeline {
                   steps {
                       script {
                           if (sh(returnStdout: true, script: 'cat first.txt').trim() == 'true') {
-                                if (sh(returnStdout: true, script: 'cat second.txt').strim() == 'true') {
+                                if (sh(returnStdout: true, script: 'cat second.txt').trim() == 'true') {
                                     echo 'Va tot'
                                 } else {
                                     echo 'Va uno'
                                 }
                           } else {
-                                if (sh(returnStdout: true, script: 'echo $dos').strim() == 'true') {
+                                if (sh(returnStdout: true, script: 'echo $dos').trim() == 'true') {
                                     echo 'Va uno'
                                 } else {
                                     echo 'No va cap la foguera ni s"anxufa'
