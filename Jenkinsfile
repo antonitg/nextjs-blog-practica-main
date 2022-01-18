@@ -66,17 +66,30 @@ pipeline {
     stages {
           stage('First') {
                 steps {
-                 sh 'node ./scriptsJenkins/firstScript.js ${persona_a_saludar} >> second.txt'
+                 sh 'node ./scriptsJenkins/firstScript.js ${firstVal} >> first.txt'
+                 sh 'uno=`cat first.txt`'
+                
                 }
           }
             stage('Second') {
                 steps {
-                 sh 'node ./scriptsJenkins/secondScript.js ${persona_a_saludar} >> first.txt'
+                 sh 'node ./scriptsJenkins/secondScript.js ${secondVal} >> second.txt'
+                 sh 'dos=`cat second.txt`'
                 }
           }
             stage('Third') {
                 steps {
-                 sh 'cat first.txt'
+                          if (sh 'echo $uno' == true) {
+                              echo '1'
+                          } else {
+                              echo '2'
+                          }
+                          if (sh 'echo $uno' == 'true') {
+                              echo '3'
+                          } else {
+                              echo '4'
+                          }
+
                 }
           }
                                                 
