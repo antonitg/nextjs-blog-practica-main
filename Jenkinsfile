@@ -79,12 +79,12 @@ pipeline {
           }
             stage('Third') {
                 steps {
-                          if (sh 'echo $uno' == true) {
+                          if ($uno == true) {
                               echo '1'
                           } else {
                               echo '2'
                           }
-                          if (sh 'echo $uno' == 'true') {
+                          if ($uno == 'true') {
                               echo '3'
                           } else {
                               echo '4'
