@@ -82,23 +82,18 @@ pipeline {
                       script {
                           if (sh(returnStdout: true, script: 'cat first.txt').trim() == 'true') {
                                 echo "funciona"
-//                                 if (sh(returnStdout: true, script: 'echo $dos') == 'true') {
-//                                     echo 'Va tot'
-//                                 } else {
-//                                     echo 'Va uno'
-//                                 }
+                                if (sh(returnStdout: true, script: 'cat second.txt') == 'true') {
+                                    echo 'Va tot'
+                                } else {
+                                    echo 'Va uno'
+                                }
                           } else {
                                 echo "no va :c"
-//                                 if (sh(returnStdout: true, script: 'echo $dos') == 'true') {
-//                                     echo 'Va uno'
-//                                 } else {
-//                                     echo 'No va cap la foguera ni s"anxufa'
-//                                 }
-                          }
-                          if (sh(returnStdout: true, script: 'cat first.txt').trim() == true) {
-                              echo 'I only execute on the master branch 3'
-                          } else {
-                              echo 'I execute elsewhere 4'
+                                if (sh(returnStdout: true, script: 'echo $dos') == 'true') {
+                                    echo 'Va uno'
+                                } else {
+                                    echo 'No va cap la foguera ni s"anxufa'
+                                }
                           }
                       }
                   }
