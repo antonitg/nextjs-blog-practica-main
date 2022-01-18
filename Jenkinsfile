@@ -80,7 +80,7 @@ pipeline {
             stage('Third') {
                   steps {
                       script {
-                          if (sh(returnStdout: true, script: 'echo "$uno"').trim() == 'true') {
+                          if (sh(returnStdout: true, script: 'echo $uno').trim() == 'true') {
                                 echo "funciona"
 //                                 if (sh(returnStdout: true, script: 'echo $dos') == 'true') {
 //                                     echo 'Va tot'
