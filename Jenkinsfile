@@ -80,7 +80,7 @@ pipeline {
             stage('Third') {
                   steps {
                       script {
-                          if (sh(returnStdout: true, script: 'echo "$uno"') == 'true') {
+                          if (sh(returnStdout: true, script: 'echo "$uno"').trim() == 'true') {
                                 echo "funciona"
 //                                 if (sh(returnStdout: true, script: 'echo $dos') == 'true') {
 //                                     echo 'Va tot'
@@ -95,7 +95,7 @@ pipeline {
 //                                     echo 'No va cap la foguera ni s"anxufa'
 //                                 }
                           }
-                          if (sh(returnStdout: true, script: 'echo $uno') == true) {
+                          if (sh(returnStdout: true, script: 'echo $uno').trim() == true) {
                               echo 'I only execute on the master branch 3'
                           } else {
                               echo 'I execute elsewhere 4'
