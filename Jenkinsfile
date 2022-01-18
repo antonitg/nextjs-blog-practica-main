@@ -52,6 +52,10 @@ pipeline {
     triggers {
         pollSCM 'H/3 * * * *'
     }
+      parameters {
+            string(name: 'firstVal', defaultValue: 'beateta'),
+            string(name: 'secondVal', defaultValue: 'ines'),
+      }
 //         docker {
 //             image 'node:lts-buster-slim'
 //             args '-p 3000:3000'
@@ -60,39 +64,56 @@ pipeline {
         CI = 'true' 
     }
     stages {
-        stage('Build') {
-            steps {
-                sh 'npm install --save'
-            }
-        }
-        stage('Deploy') { 
-            steps {
-                sh 'nohup npm run dev > /dev/null 2>&1 &' 
-            }
-        }
-        stage('Lint') { 
-            steps {
-                sh 'npm run lint' 
-            }
-        }
-        stage('Parallel Stage') {
-            parallel {
-                stage('Branch A') {
-                    steps {
-                        echo "On Branch A"
-                    }
+          stage('First') {
+                steps {
+                 first=`node ./scriptsJenkins/firstScript.js ${persona_a_saludar}`
                 }
-                stage('Branch B') {
-                     steps {
-                        echo "On Branch B"
-                    }
+          },
+            stage('Second') {
+                steps {
+                 second=`node ./scriptsJenkins/secondScript.js ${persona_a_saludar}`
                 }
-            }
-        }
-        stage('Test') { 
-            steps {
-                sh 'npm run jest' 
-            }
-        }  
+          },
+            stage('Third') {
+                steps {
+                 echo "$first $second"
+                }
+          },
+                                                
+                                                
+//         stage('Build') {
+//             steps {
+//                 sh 'npm install --save'
+//             }
+//         }
+//         stage('Deploy') { 
+//             steps {
+//                 sh 'nohup npm run dev > /dev/null 2>&1 &' 
+//             }
+//         }
+//         stage('Lint') { 
+//             steps {
+//                 sh 'npm run lint' 
+//             }
+//         }
+//         stage('Parallel Stage') {
+//             parallel {
+//                 stage('Branch A') {
+//                     steps {
+//                         echo "On Branch A"
+//                     }
+//                 }
+//                 stage('Branch B') {
+//                      steps {
+//                         echo "On Branch B"
+//                     }
+//                 }
+//             }
+//         }
+//         stage('Test') { 
+//             steps {
+//                 sh 'npm run jest' 
+//             }
+//         }  
     }
 }
