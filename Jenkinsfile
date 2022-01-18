@@ -66,17 +66,17 @@ pipeline {
     stages {
           stage('First') {
                 steps {
-                 first=`node ./scriptsJenkins/firstScript.js ${persona_a_saludar}`
+                 node ./scriptsJenkins/firstScript.js ${persona_a_saludar} >> second.txt
                 }
           },
             stage('Second') {
                 steps {
-                 second=`node ./scriptsJenkins/secondScript.js ${persona_a_saludar}`
+                 node ./scriptsJenkins/secondScript.js ${persona_a_saludar} >> first.txt
                 }
           },
             stage('Third') {
                 steps {
-                 echo "$first $second"
+                 cat first.txt
                 }
           },
                                                 
