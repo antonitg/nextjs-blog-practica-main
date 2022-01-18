@@ -66,14 +66,14 @@ pipeline {
     stages {
             stage('First') {
                 steps {
-                 sh 'node ./scriptsJenkins/firstScript.js ${firstVal} >> first.txt'
+                 sh 'node ./scriptsJenkins/firstScript.js ${firstVal} > first.txt'
                  sh 'uno=`cat first.txt`'
                 
                 }
             }
             stage('Second') {
                 steps {
-                 sh 'node ./scriptsJenkins/secondScript.js ${secondVal} >> second.txt'
+                 sh 'node ./scriptsJenkins/secondScript.js ${secondVal} > second.txt'
                  sh 'dos=`cat second.txt`'
                 }
             }
