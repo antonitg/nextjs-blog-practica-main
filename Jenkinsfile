@@ -78,19 +78,17 @@ pipeline {
                 }
           }
             stage('Third') {
-                steps {
-                          if ($uno == true) {
-                              echo '1'
-                          } else {
-                              echo '2'
-                          }
-                          if ($uno == 'true') {
-                              echo '3'
-                          } else {
-                              echo '4'
-                          }
-
-                }
+                  if ($uno == true) {
+                        echo '1'
+                  } else {
+                        echo '2'
+                  }
+                  if ($uno == 'true') {
+                        echo '3'
+                  } else {
+                        echo '4'
+                  }
+                
           }
                                                 
                                                 
