@@ -68,17 +68,17 @@ pipeline {
                 steps {
                  sh 'node ./scriptsJenkins/firstScript.js ${persona_a_saludar} >> second.txt'
                 }
-          },
+          }
             stage('Second') {
                 steps {
                  sh 'node ./scriptsJenkins/secondScript.js ${persona_a_saludar} >> first.txt'
                 }
-          },
+          }
             stage('Third') {
                 steps {
                  sh 'cat first.txt'
                 }
-          },
+          }
                                                 
                                                 
 //         stage('Build') {
