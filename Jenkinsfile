@@ -78,16 +78,30 @@ pipeline {
                 }
             }
             stage('Third') {
-                  if ($uno == true) {
-                        echo '1'
-                  } else {
-                        echo '2'
+                  steps {
+                      script {
+                          if (echo $uno == 'true') {
+                              echo 'I only execute on the master branch 1'
+                          } else {
+                              echo 'I execute elsewhere 2'
+                          }
+                          if (echo $uno == true) {
+                              echo 'I only execute on the master branch 3'
+                          } else {
+                              echo 'I execute elsewhere 4'
+                          }
+                      }
                   }
-                  if ($uno == 'true') {
-                        echo '3'
-                  } else {
-                        echo '4'
-                  }
+//                   if ($uno == true) {
+//                         echo '1'
+//                   } else {
+//                         echo '2'
+//                   }
+//                   if ($uno == 'true') {
+//                         echo '3'
+//                   } else {
+//                         echo '4'
+//                   }
                 
           }
                                                 
