@@ -53,8 +53,8 @@ pipeline {
         pollSCM 'H/3 * * * *'
     }
       parameters {
-            string(name: 'firstVal', defaultValue: 'beateta'),
-            string(name: 'secondVal', defaultValue: 'ines'),
+            string(name: 'firstVal', defaultValue: 'beateta')
+            string(name: 'secondVal', defaultValue: 'ines')
       }
 //         docker {
 //             image 'node:lts-buster-slim'
