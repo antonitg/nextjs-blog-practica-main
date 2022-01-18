@@ -81,9 +81,17 @@ pipeline {
                   steps {
                       script {
                           if (sh(returnStdout: true, script: 'echo $uno') == 'true') {
-                              echo 'I only execute on the master branch 1'
+                                if (sh(returnStdout: true, script: 'echo $dos') == 'true') {
+                                    echo 'Va tot'
+                                } else {
+                                    echo 'Va uno'
+                                }
                           } else {
-                              echo 'I execute elsewhere 2'
+                                if (sh(returnStdout: true, script: 'echo $dos') == 'true') {
+                                    echo 'Va uno'
+                                } else {
+                                    echo 'No va cap la foguera ni s"anxufa'
+                                }
                           }
                           if (sh(returnStdout: true, script: 'echo $uno') == true) {
                               echo 'I only execute on the master branch 3'
