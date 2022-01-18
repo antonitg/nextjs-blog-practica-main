@@ -80,12 +80,12 @@ pipeline {
             stage('Third') {
                   steps {
                       script {
-                          if (echo $uno == 'true') {
+                          if ($uno == 'true') {
                               echo 'I only execute on the master branch 1'
                           } else {
                               echo 'I execute elsewhere 2'
                           }
-                          if (echo $uno == true) {
+                          if ($uno == true) {
                               echo 'I only execute on the master branch 3'
                           } else {
                               echo 'I execute elsewhere 4'
