@@ -1,0 +1,1 @@
+(process.argv[2] === "ines") ? console.log(true) : console.log(false)

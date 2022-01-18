@@ -1,0 +1,1 @@
+(process.argv[2] === "beateta") ? console.log(true) : console.log(false)
